@@ -32,7 +32,8 @@ config.window_decorations = "RESIZE"
 -- When there is only a single tab, the tab bar is hidden
 config.hide_tab_bar_if_only_one_tab = true
 
-config.color_scheme = "Gruvbox Dark (Gogh)"
+-- config.color_scheme = "Gruvbox Dark (Gogh)"
+config.color_scheme = "Tokyo Night"
 
 config.font = wezterm.font("JetBrains Mono")
 config.font_size = 18.0
