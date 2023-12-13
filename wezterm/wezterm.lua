@@ -27,7 +27,7 @@ config.window_padding = {
 }
 
 -- Disable the title bar but enable the resizable border
-config.window_decorations = "RESIZE"
+config.window_decorations = "RESIZE | MACOS_FORCE_DISABLE_SHADOW"
 
 -- When there is only a single tab, the tab bar is hidden
 config.hide_tab_bar_if_only_one_tab = true
