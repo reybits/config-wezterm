@@ -2,9 +2,9 @@
 local wezterm = require("wezterm")
 
 -- Maximize window at startup
-wezterm.on("gui-startup", function()
+wezterm.on("gui-startup", function(cmd)
 	local mux = wezterm.mux
-	local _, _, window = mux.spawn_window({})
+	local _, _, window = mux.spawn_window(cmd or {})
 	window:gui_window():maximize()
 end)
 
