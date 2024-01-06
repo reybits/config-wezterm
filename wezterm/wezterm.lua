@@ -38,18 +38,33 @@ config.color_scheme = "Tokyo Night"
 config.font = wezterm.font("JetBrains Mono")
 config.font_size = 18.0
 
+--[[
 config.font_rules = {
+	-- non italic
+	{
+		intensity = "Normal",
+		italic = false,
+		font = wezterm.font("JetBrains Mono", { weight = "Regular", style = "Normal" }),
+	},
 	{
 		intensity = "Bold",
 		italic = false,
 		font = wezterm.font("JetBrains Mono", { weight = "Bold", style = "Normal" }),
 	},
+
+	-- italic
 	{
 		intensity = "Normal",
+		italic = true,
+		font = wezterm.font("JetBrains Mono", { weight = "Regular", style = "Italic" }),
+	},
+	{
+		intensity = "Bold",
 		italic = true,
 		font = wezterm.font("JetBrains Mono", { weight = "Bold", style = "Italic" }),
 	},
 }
+--]]
 
 -- and finally, return the configuration to wezterm
 return config
