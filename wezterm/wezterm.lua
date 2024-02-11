@@ -19,12 +19,7 @@ end
 
 -- This is where you actually apply your config choices
 
-config.window_padding = {
-	left = 20,
-	right = 20,
-	top = 20,
-	bottom = 0,
-}
+config.use_resize_increments = true
 
 -- Disable the title bar but enable the resizable border
 config.window_decorations = "RESIZE | MACOS_FORCE_DISABLE_SHADOW"
