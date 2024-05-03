@@ -31,7 +31,12 @@ config.hide_tab_bar_if_only_one_tab = true
 config.color_scheme = "Tokyo Night"
 
 config.font = wezterm.font("JetBrains Mono")
-config.font_size = 18.0
+if os.getenv("XDG_CURRENT_DESKTOP") == "Hyprland" then
+	config.enable_wayland = false
+	config.font_size = 24.0
+else
+	config.font_size = 18.0
+end
 
 --[[
 config.font_rules = {
