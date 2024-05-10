@@ -33,6 +33,19 @@ config.color_scheme = "Tokyo Night"
 config.font = wezterm.font("JetBrains Mono")
 config.font_size = 18.0
 
+-- Disable ligatures in most fonts.
+-- https://wezfurlong.org/wezterm/config/font-shaping.html#advanced-font-shaping-options
+-- https://learn.microsoft.com/en-us/typography/opentype/spec/featurelist
+config.harfbuzz_features = {
+	-- ==, >=, <=, !=, ===
+	"calt=0", -- Contextual Alternates.
+	"clig=0", -- Contextual Ligatures. (It makes no difference whether this option is disabled or enabled)
+	"liga=0", -- Standard Ligatures.
+
+	-- Slashed Zero: 0
+	"zero",
+}
+
 --[[
 config.font_rules = {
 	-- non italic
