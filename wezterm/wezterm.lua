@@ -20,7 +20,7 @@ end
 -- This is where you actually apply your config choices
 
 -- run tmux at sturtup
-config.default_prog = { "/bin/zsh", "-l", "-c", "tmux attach || tmux" }
+-- config.default_prog = { "/bin/zsh", "-l", "-c", "tmux attach || tmux" }
 
 config.use_resize_increments = true
 
