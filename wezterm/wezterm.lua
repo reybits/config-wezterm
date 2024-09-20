@@ -82,5 +82,18 @@ config.font_rules = {
 }
 --]]
 
+-- check for custom config and merge with default
+local custom_module_name = "custom"
+local path = wezterm.config_dir .. "/" .. custom_module_name .. ".lua"
+local f = io.open(path, "r")
+if f ~= nil then
+	io.close(f)
+
+	local custom = require(custom_module_name)
+	for k, v in pairs(custom) do
+		config[k] = v
+	end
+end
+
 -- and finally, return the configuration to wezterm
 return config
