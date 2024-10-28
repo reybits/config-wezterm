@@ -33,7 +33,8 @@ config.hide_tab_bar_if_only_one_tab = true
 -- config.color_scheme = "Gruvbox Dark (Gogh)"
 config.color_scheme = "Tokyo Night"
 
-config.font = wezterm.font("JetBrains Mono")
+-- config.font = wezterm.font("JetBrains Mono")
+config.font = wezterm.font("JetBrainsMonoNL Nerd Font Mono")
 if os.getenv("XDG_CURRENT_DESKTOP") == "Hyprland" then
 	config.enable_wayland = false
 	config.font_size = 24.0
