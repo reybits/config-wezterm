@@ -32,7 +32,7 @@ config.hide_tab_bar_if_only_one_tab = true
 
 -- config.color_scheme = "Gruvbox Dark (Gogh)"
 -- config.color_scheme = "Tokyo Night"
-config.color_scheme = 'Kanagawa (Gogh)'
+config.color_scheme = "Kanagawa (Gogh)"
 
 -- config.font = wezterm.font("JetBrains Mono")
 config.font = wezterm.font("JetBrainsMonoNL Nerd Font Mono")
