@@ -19,7 +19,7 @@ end
 
 -- This is where you actually apply your config choices
 
--- run tmux at sturtup
+-- Run tmux at sturtup
 -- config.default_prog = { "/bin/zsh", "-l", "-c", "tmux attach || tmux" }
 
 config.use_resize_increments = true
@@ -34,14 +34,8 @@ config.hide_tab_bar_if_only_one_tab = true
 -- config.color_scheme = "Tokyo Night"
 config.color_scheme = "Kanagawa (Gogh)"
 
--- config.font = wezterm.font("JetBrains Mono")
-config.font = wezterm.font("JetBrainsMonoNL Nerd Font Mono")
-if os.getenv("XDG_CURRENT_DESKTOP") == "Hyprland" then
-	config.enable_wayland = false
-	config.font_size = 24.0
-else
-	config.font_size = 18.0
-end
+config.font = wezterm.font("Mononoki Nerd Font")
+config.font_size = 20.0
 
 -- Disable ligatures in most fonts.
 -- https://wezfurlong.org/wezterm/config/font-shaping.html#advanced-font-shaping-options
@@ -84,7 +78,7 @@ config.font_rules = {
 }
 --]]
 
--- check for custom config and merge with default
+-- Load custom config if it exists and merge it with defaults
 local custom_module_name = "custom"
 local path = wezterm.config_dir .. "/" .. custom_module_name .. ".lua"
 local f = io.open(path, "r")
