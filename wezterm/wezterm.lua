@@ -8,6 +8,11 @@ wezterm.on("gui-startup", function(cmd)
 	window:gui_window():maximize()
 end)
 
+-- Maximize window on resize
+wezterm.on("window-resized", function(window, _)
+	window:maximize()
+end)
+
 -- This table will hold the configuration.
 local config = {}
 
