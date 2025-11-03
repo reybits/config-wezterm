@@ -39,8 +39,11 @@ config.hide_tab_bar_if_only_one_tab = true
 -- config.color_scheme = "Tokyo Night"
 config.color_scheme = "Kanagawa (Gogh)"
 
-config.font = wezterm.font("Mononoki Nerd Font")
-config.font_size = 18.0
+-- config.font = wezterm.font("Mononoki Nerd Font")
+-- config.font_size = 18.0
+config.font = wezterm.font("JetBrainsMono Nerd Font")
+config.font_size = 16.0
+config.line_height = 0.9
 
 -- Disable ligatures in most fonts.
 -- https://wezfurlong.org/wezterm/config/font-shaping.html#advanced-font-shaping-options
