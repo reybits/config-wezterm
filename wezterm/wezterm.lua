@@ -132,10 +132,11 @@ config.hide_tab_bar_if_only_one_tab = true
 -- config.color_scheme = "Tokyo Night"
 config.color_scheme = "Kanagawa (Gogh)"
 
--- config.font = wezterm.font("Mononoki Nerd Font")
+-- local font_name = "Mononoki Nerd Font"
 -- config.font_size = 18.0
-config.font = wezterm.font("JetBrainsMono Nerd Font")
-config.font_size = 16.0
+local font_name = "JetBrainsMono Nerd Font"
+config.font = wezterm.font(font_name)
+config.font_size = 19.0
 config.line_height = 0.9
 
 -- Disable ligatures in most fonts.
@@ -151,33 +152,31 @@ config.harfbuzz_features = {
 	"zero",
 }
 
---[[
 config.font_rules = {
 	-- non italic
 	{
 		intensity = "Normal",
 		italic = false,
-		font = wezterm.font("JetBrains Mono", { weight = "Regular", style = "Normal" }),
+		font = wezterm.font(font_name, { weight = "Regular", style = "Normal" }),
 	},
 	{
 		intensity = "Bold",
 		italic = false,
-		font = wezterm.font("JetBrains Mono", { weight = "Bold", style = "Normal" }),
+		font = wezterm.font(font_name, { weight = "Bold", style = "Normal" }),
 	},
 
 	-- italic
 	{
 		intensity = "Normal",
 		italic = true,
-		font = wezterm.font("JetBrains Mono", { weight = "Regular", style = "Italic" }),
+		font = wezterm.font(font_name, { weight = "Regular", style = "Italic" }),
 	},
 	{
 		intensity = "Bold",
 		italic = true,
-		font = wezterm.font("JetBrains Mono", { weight = "Bold", style = "Italic" }),
+		font = wezterm.font(font_name, { weight = "Bold", style = "Italic" }),
 	},
 }
---]]
 
 -- Load custom config if it exists and merge it with defaults
 local custom_module_name = "custom"
