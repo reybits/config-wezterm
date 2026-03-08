@@ -8,10 +8,49 @@ wezterm.on("gui-startup", function(cmd)
 	window:gui_window():maximize()
 end)
 
--- Maximize window on resize
-wezterm.on("window-resized", function(window, _)
-	window:maximize()
+-- Center the terminal grid by distributing leftover pixels evenly as padding
+local function center_padding(window, pane)
+	local overrides = window:get_config_overrides() or {}
+
+	-- Reset padding to get accurate cell dimensions
+	overrides.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
+	window:set_config_overrides(overrides)
+
+	-- Measure after layout settles with zero padding
+	wezterm.time.call_after(0.1, function()
+		local win_dims = window:get_dimensions()
+		local tab_dims = pane:tab():get_size()
+
+		if tab_dims.cols > 0 and tab_dims.rows > 0 then
+			local cell_width = tab_dims.pixel_width / tab_dims.cols
+			local cell_height = tab_dims.pixel_height / tab_dims.rows
+
+			local extra_x = win_dims.pixel_width - math.floor(win_dims.pixel_width / cell_width) * cell_width
+			local extra_y = win_dims.pixel_height - math.floor(win_dims.pixel_height / cell_height) * cell_height
+
+			overrides = window:get_config_overrides() or {}
+			overrides.window_padding = {
+				left = math.floor(extra_x / 2),
+				right = math.ceil(extra_x / 2),
+				top = math.floor(extra_y / 2),
+				bottom = math.ceil(extra_y / 2),
+			}
+			window:set_config_overrides(overrides)
+		end
+	end)
+end
+
+-- Custom event to trigger recentering
+wezterm.on("center-padding", function(window, pane)
+	center_padding(window, pane)
 end)
+
+-- Maximize window on resize and center the grid
+wezterm.on("window-resized", function(window, pane)
+	window:maximize()
+	center_padding(window, pane)
+end)
+
 
 -- This table will hold the configuration.
 local config = {}
@@ -29,6 +68,58 @@ end
 -- require("mux").apply(config, wezterm)
 
 config.use_resize_increments = true
+
+-- Override font size keys to also recenter the grid
+config.keys = {
+	{
+		key = "=",
+		mods = "CMD",
+		action = wezterm.action.Multiple({
+			wezterm.action.IncreaseFontSize,
+			wezterm.action.EmitEvent("center-padding"),
+		}),
+	},
+	{
+		key = "-",
+		mods = "CMD",
+		action = wezterm.action.Multiple({
+			wezterm.action.DecreaseFontSize,
+			wezterm.action.EmitEvent("center-padding"),
+		}),
+	},
+	{
+		key = "0",
+		mods = "CMD",
+		action = wezterm.action.Multiple({
+			wezterm.action.ResetFontSize,
+			wezterm.action.EmitEvent("center-padding"),
+		}),
+	},
+	{
+		key = "=",
+		mods = "CTRL",
+		action = wezterm.action.Multiple({
+			wezterm.action.IncreaseFontSize,
+			wezterm.action.EmitEvent("center-padding"),
+		}),
+	},
+	{
+		key = "-",
+		mods = "CTRL",
+		action = wezterm.action.Multiple({
+			wezterm.action.DecreaseFontSize,
+			wezterm.action.EmitEvent("center-padding"),
+		}),
+	},
+	{
+		key = "0",
+		mods = "CTRL",
+		action = wezterm.action.Multiple({
+			wezterm.action.ResetFontSize,
+			wezterm.action.EmitEvent("center-padding"),
+		}),
+	},
+}
 
 -- Disable the title bar (TITLE) but enable the resizable border (RESIZE).
 -- On macOS, also disable the shadow (MACOS_FORCE_DISABLE_SHADOW)
