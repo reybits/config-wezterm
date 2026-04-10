@@ -47,10 +47,18 @@ end)
 
 -- Maximize window on resize and center the grid
 wezterm.on("window-resized", function(window, pane)
-	window:maximize()
 	center_padding(window, pane)
 end)
 
+-- Re-maximize window when it regains focus (e.g. after macOS unlock).
+-- Delayed to let macOS settle DPI after sleep/wake cycle (wezterm#4633).
+wezterm.on("window-focus-changed", function(window, pane)
+	if window:is_focused() then
+		wezterm.time.call_after(0.2, function()
+			window:maximize()
+		end)
+	end
+end)
 
 -- This table will hold the configuration.
 local config = {}
@@ -67,7 +75,10 @@ end
 -- uncomment the following line:
 -- require("mux").apply(config, wezterm)
 
-config.use_resize_increments = true
+-- Disabled: use_resize_increments rounds down on spurious DPI-change resizes
+-- during macOS lock/unlock, compounding window shrink (wezterm#4633).
+-- center_padding() already handles leftover pixel distribution.
+config.use_resize_increments = false
 
 -- Override font size keys to also recenter the grid
 config.keys = {
