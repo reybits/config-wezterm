@@ -80,6 +80,9 @@ end
 -- center_padding() already handles leftover pixel distribution.
 config.use_resize_increments = false
 
+-- Disable composed key when right Alt is pressed.
+config.send_composed_key_when_right_alt_is_pressed = false
+
 -- Override font size keys to also recenter the grid
 config.keys = {
 	{
